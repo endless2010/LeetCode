@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import junit.framework.Assert;
@@ -48,9 +46,9 @@ public class Solution15 {
              }
 
          }
-        Set set = new HashSet(result);
+        Set<List<Integer>> set = new HashSet<List<Integer>>(result);
         List<List<Integer>> result2 = new ArrayList<List<Integer>>();
-        for(Object e:set){
+        for(List<Integer> e:set){
             result2.add((List<Integer>) e);
         }
         if(result2.isEmpty()){

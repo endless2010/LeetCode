@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 import org.junit.Assert;
 import org.junit.Test;
 

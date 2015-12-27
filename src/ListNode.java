@@ -40,4 +40,7 @@ public class ListNode {
 			result[i]=list.get(i);
 		return result;
 	}
+	public void print() {
+		
+	}
 }
