@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -20,42 +18,31 @@ import org.junit.Test;
  * 
  */
 public class Solution15 {
-    public List<List<Integer>> threeSum(int[] nums) {
-    	List<List<Integer>> result = new ArrayList<List<Integer>>();
-        if(nums.length<3)
-             return result;
-         Arrays.sort(nums);
-         for(int i=0;i<nums.length-2;i++){
-             if(i>0&&nums[i]==nums[i-1])
-                 continue;
-             int j=i+1,k=nums.length-1;
-             while(j<k){
-                 if(nums[i]+nums[j]+nums[k]==0){
-                     List<Integer> list = new ArrayList<Integer>();
-                     list.add(nums[i]);
-                     list.add(nums[j]);
-                     list.add(nums[k]);
-                     result.add(list);
-                     j++;
-                     k--;
-                 }else if(nums[j]+nums[k]<-1*nums[i]){
-                     j++;
-                 }else if(nums[j]+nums[k]>-1*nums[i]){
-                     k--;
-                 }
-             }
+	public List<List<Integer>> threeSum(int[] nums) {
+	    List<List<Integer>> result = new ArrayList<>();
+	    if(nums == null || nums.length < 3) return result;
+	    Arrays.sort(nums);
 
-         }
-        Set<List<Integer>> set = new HashSet<List<Integer>>(result);
-        List<List<Integer>> result2 = new ArrayList<List<Integer>>();
-        for(List<Integer> e:set){
-            result2.add((List<Integer>) e);
-        }
-        if(result2.isEmpty()){
-            return result;
-        }else
-        return result2;
-    }
+	    int len = nums.length;
+	    for(int i = 0; i < len; i++) {
+	        if(i > 0 && nums[i] == nums[i - 1]) continue;        // Skip same results
+	        int target = 0 - nums[i];
+	        int j = i + 1, k = len - 1;
+	        while(j < k) {
+	            if(nums[j] + nums[k] == target) {
+	                result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+	                while(j < k && nums[j] == nums[j + 1]) j++;  // Skip same results
+	                while(j < k && nums[k] == nums[k - 1]) k--;  // Skip same results
+	                j++; k--;
+	            } else if(nums[j] + nums[k] < target) {
+	                j++;
+	            } else {
+	                k--;
+	            }
+	        }
+	    }
+	    return result;
+	}
 
     @Test
     public void test(){
